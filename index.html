@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>黃聖硯 | Personal Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #6b7280;
+            --accent: #3b82f6;
+            --bg: #fafafa;
+            --card: #ffffff;
+            --border: #e5e7eb;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
+            background: var(--bg);
+            color: var(--primary);
+            line-height: 1.8;
+        }
+
+        /* 導航列 */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            padding: 16px;
+            list-style: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* 通用容器 */
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        .hero-content {
+            max-width: 500px;
+        }
+
+        .profile-photo {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 24px;
+            border: 3px solid var(--card);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            background: var(--border);
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .hero .school {
+            color: var(--secondary);
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .hero .email {
+            display: inline-block;
+            padding: 10px 24px;
+            border: 1px solid var(--accent);
+            border-radius: 25px;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .hero .email:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Section 標題 */
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 32px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        /* About */
+        .about p {
+            color: #374151;
+            font-size: 1rem;
+        }
+
+        /* Experience */
+        .experience-category {
+            margin-bottom: 36px;
+        }
+
+        .experience-category:last-child {
+            margin-bottom: 0;
+        }
+
+        .category-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 16px;
+        }
+
+        .experience-item {
+            background: var(--card);
+            padding: 20px 24px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-bottom: 12px;
+        }
+
+        .experience-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .experience-title {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .experience-period {
+            font-size: 0.85rem;
+            color: var(--secondary);
+        }
+
+        .experience-org {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+
+        .experience-desc {
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Portfolio */
+        .portfolio-placeholder {
+            text-align: center;
+            padding: 48px 24px;
+            background: var(--card);
+            border-radius: 8px;
+            border: 2px dashed var(--border);
+            color: var(--secondary);
+        }
+
+        /* 
+           ========================================
+           ✏️ 當你有作品時，用以下格式新增：
+           ========================================
+        */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .portfolio-item {
+            background: var(--card);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+
+        .portfolio-thumb {
+            height: 140px;
+            background: var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            font-size: 0.85rem;
+        }
+
+        .portfolio-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .portfolio-info {
+            padding: 14px 16px;
+        }
+
+        .portfolio-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .portfolio-desc {
+            font-size: 0.8rem;
+            color: var(--secondary);
+        }
+
+        /* Contact */
+        .contact {
+            text-align: center;
+        }
+
+        .contact p {
+            color: var(--secondary);
+            margin-bottom: 16px;
+        }
+
+        .contact-email {
+            font-size: 1.1rem;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .contact-email:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 24px;
+            font-size: 0.8rem;
+            color: var(--secondary);
+            border-top: 1px solid var(--border);
+        }
+
+        /* RWD */
+        @media (max-width: 600px) {
+            nav ul {
+                gap: 20px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .profile-photo {
+                width: 120px;
+                height: 120px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .experience-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 導航列 -->
+    <nav>
+        <ul>
+            <li><a href="#about">關於我</a></li>
+            <li><a href="#experience">經歷</a></li>
+            <li><a href="#portfolio">作品集</a></li>
+            <li><a href="#contact">聯絡</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <!-- 📷 請將照片命名為 photo.jpg 放在同一資料夾 -->
+            <img src="photo.jpg" alt="黃聖硯" class="profile-photo" onerror="this.style.display='none'">
+            <h1>黃聖硯</h1>
+            <p class="school">國立台灣大學經濟學系</p>
+            <a href="mailto:b12303026@ntu.edu.tw" class="email">b12303026@ntu.edu.tw</a>
+        </div>
+    </section>
+
+    <!-- 關於我 -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">關於我</h2>
+            <p>我是黃聖硯，是國立台灣大學經濟系大三學生。目前在經濟系陳儀老師實驗室擔任助理。平時的興趣是打排球。</p>
+        </div>
+    </section>
+
+    <!-- 經歷 -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title">經歷</h2>
+
+            <!-- 實習經歷 -->
+            <div class="experience-category">
+                <h3 class="category-title">實習經歷</h3>
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <span class="experience-title">解題／輔導老師</span>
+                        <span class="experience-period">2023.07 - 現今</span>
+                    </div>
+                    <p class="experience-org">某補習班</p>
+                </div>
+            </div>
+
+            <!-- 社團經歷 -->
+            <div class="experience-category">
+                <h3 class="category-title">社團經歷</h3>
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <span class="experience-title">總召</span>
+                        <span class="experience-period">2025.07.20 - 2025.07.24</span>
+                    </div>
+                    <p class="experience-org">2025 台大經濟營</p>
+                    <p class="experience-desc">舉辦營隊給全台高中生，透過營隊的方式讓高中生了解簡單經濟學的內容。</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 作品集 -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">作品集</h2>
+            <div class="portfolio-placeholder">作品準備中，敬請期待！</div>
+
+            <!-- 
+                ========================================
+                ✏️ 有作品時：
+                1. 刪除上方 portfolio-placeholder
+                2. 取消下方註解
+                3. 複製 portfolio-item 新增更多
+                ========================================
+            -->
+            <!--
+            <div class="portfolio-grid">
+                <a href="連結網址" class="portfolio-item" target="_blank">
+                    <div class="portfolio-thumb">
+                        <img src="project1.jpg" alt="專案名稱">
+                    </div>
+                    <div class="portfolio-info">
+                        <p class="portfolio-title">專案名稱</p>
+                        <p class="portfolio-desc">簡短描述</p>
+                    </div>
+                </a>
+            </div>
+            -->
+        </div>
+    </section>
+
+    <!-- 聯絡 -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">聯絡我</h2>
+            <p>歡迎與我聯繫！</p>
+            <a href="mailto:b12303026@ntu.edu.tw" class="contact-email">b12303026@ntu.edu.tw</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 黃聖硯. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
